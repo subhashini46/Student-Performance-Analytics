@@ -1,30 +1,39 @@
 # 📊 Student Performance Analytics
 
-A full-stack web application for tracking student academic performance — including marks, GPA, subject trends, weak area detection, fail-risk prediction, and personalized study recommendations.
+A full-stack web application that helps students track their academic performance — including subject-wise marks, GPA calculation, performance trends, weak subject detection, fail-risk prediction, and personalized study recommendations.
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-- **Authentication** — Sign up, sign in, and protected dashboard access
-- **Per-user data** — Each account has its own isolated performance records
-- **Marks tracking** — Subject-wise mark entry and management
-- **GPA & weighted average** — Automatic calculation based on entered marks
-- **Performance charts** — Trend lines and subject comparison visualizations
-- **Weak subject detection** — Automatically flags subjects below threshold
-- **Fail-risk prediction** — "May fail this subject" signals based on current data
-- **Study recommendations** — Personalized suggestions based on marks, trends, and attendance
-- **Profile controls** — Configure current term, attendance percentage, and target GPA
+- 🔐 **User Authentication** — Secure sign up and sign in with protected routes
+- 👤 **Per-user Data** — Each account maintains its own isolated performance records
+- 📝 **Subject-wise Marks Tracking** — Add and manage marks for each subject
+- 🎓 **GPA & Weighted Average** — Auto-calculated based on entered marks
+- 📈 **Performance Trend Charts** — Visualize progress over time using Recharts
+- 📊 **Subject Comparison** — Compare performance across all subjects
+- ⚠️ **Weak Subject Detection** — Automatically flags underperforming subjects
+- 🚨 **Fail-Risk Prediction** — Highlights subjects where the student may be at risk
+- 💡 **Study Recommendations** — Suggestions based on marks, trends, and attendance
+- ⚙️ **Profile Settings** — Configure current term, attendance percentage, and target GPA
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer     | Technology                          |
-|-----------|--------------------------------------|
-| Frontend  | React + Vite, React Router, Recharts, Lucide React |
-| Backend   | Node.js + Express                   |
-| Database  | MongoDB + Mongoose                  |
+**Frontend**
+- React + Vite
+- React Router
+- Recharts (charts & visualizations)
+- Lucide React (icons)
+
+**Backend**
+- Node.js
+- Express.js
+
+**Database**
+- MongoDB
+- Mongoose
 
 ---
 
@@ -32,153 +41,138 @@ A full-stack web application for tracking student academic performance — inclu
 
 ```
 Student-Performance-Analytics/
-├── client/                  # React frontend
+├── client/                    # React frontend (Vite)
 │   ├── src/
-│   │   ├── api/             # API request helpers
-│   │   ├── context/         # Auth context (global state)
-│   │   ├── data/            # Analytics & GPA calculations
-│   │   ├── pages/           # Auth and dashboard pages
+│   │   ├── api/               # Axios / fetch API helpers
+│   │   ├── context/           # Global Auth context
+│   │   ├── data/              # Analytics & GPA calculation logic
+│   │   ├── pages/             # Auth pages & Dashboard
 │   │   └── styles.css
-│   ├── vercel.json          # Vercel SPA routing config
+│   ├── vercel.json            # SPA routing config (for future deployment)
 │   └── package.json
-├── server/                  # Express backend
-│   ├── config/              # MongoDB connection
-│   ├── controllers/         # Route handlers
-│   ├── middleware/          # Auth middleware
-│   ├── models/              # Mongoose schemas
-│   ├── routes/              # API route definitions
-│   ├── utils/               # Helper utilities
+├── server/                    # Express backend
+│   ├── config/                # MongoDB connection setup
+│   ├── controllers/           # Business logic handlers
+│   ├── middleware/            # Auth middleware (JWT)
+│   ├── models/                # Mongoose schemas (User, Performance)
+│   ├── routes/                # API route definitions
+│   ├── utils/                 # Helper functions
 │   └── package.json
-├── render.yaml              # Render deployment blueprint
+├── render.yaml                # Render deployment config (for future use)
 ├── .gitignore
-└── package.json
+└── package.json               # Root scripts to run both client & server
 ```
 
 ---
 
-## 🚀 Getting Started (Local Development)
+## ⚙️ Prerequisites
 
-### Prerequisites
+Make sure you have the following installed before running the project:
 
-- Node.js `^20.19.0` or `>=22.12.0`
-- MongoDB running locally
+- [Node.js](https://nodejs.org/) `^20.19.0` or `>=22.12.0`
+- [MongoDB](https://www.mongodb.com/try/download/community) (running locally)
+- [MongoDB Compass](https://www.mongodb.com/products/compass) *(optional — for viewing data visually)*
 
-### 1. Install Dependencies
+---
+
+## 🏃 Running Locally
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/subhashini46/Student-Performance-Analytics.git
+cd Student-Performance-Analytics
+```
+
+### 2. Install All Dependencies
 
 ```bash
 npm run install:all
 ```
 
-### 2. Start the Backend
+This installs packages for both `client/` and `server/`.
+
+### 3. Configure Environment Variables
+
+Create a file at `server/.env` with the following:
+
+```env
+PORT=5000
+MONGO_URI=mongodb://127.0.0.1:27017/student_performance_analytics
+TOKEN_SECRET=your_secret_key_here
+CLIENT_URL=http://127.0.0.1:5173
+CLIENT_URLS=http://127.0.0.1:5173,http://localhost:5173
+ALLOW_VERCEL_PREVIEWS=false
+```
+
+> Replace `your_secret_key_here` with any long random string for JWT signing.
+
+### 4. Start the Backend
 
 ```bash
 npm run dev:server
 ```
 
-### 3. Start the Frontend
+The API will run at `http://localhost:5000`.
 
-In a separate terminal:
+### 5. Start the Frontend
+
+Open a **new terminal** and run:
 
 ```bash
 npm run dev:client
 ```
 
-### 4. Open in Browser
-
-```
-http://127.0.0.1:5173
-```
+The app will open at `http://127.0.0.1:5173`.
 
 ---
 
-## 🔧 Environment Configuration
+## 🗄️ Viewing Data in MongoDB Compass
 
-The server defaults to a local MongoDB instance:
-
-```
-mongodb://127.0.0.1:27017/student_performance_analytics
-```
-
-To customize, create a `server/.env` file:
-
-```env
-PORT=5000
-CLIENT_URL=http://127.0.0.1:5173
-CLIENT_URLS=http://127.0.0.1:5173,http://localhost:5173
-ALLOW_VERCEL_PREVIEWS=false
-TOKEN_SECRET=replace_this_with_a_long_random_secret
-MONGO_URI=mongodb://127.0.0.1:27017/student_performance_analytics
-```
+1. Make sure MongoDB is running on your machine
+2. Open **MongoDB Compass** and connect to:
+   ```
+   mongodb://127.0.0.1:27017
+   ```
+3. Start the app and create an account
+4. You'll see the database `student_performance_analytics` with two collections:
+   - `users` — Stores registered user accounts
+   - `performances` — Stores each user's subject marks and analytics data
 
 ---
 
-## 🗄️ Viewing Data with MongoDB Compass
+## 📜 Available Scripts
 
-1. Ensure MongoDB is running on your machine
-2. Open MongoDB Compass and connect to `mongodb://127.0.0.1:27017`
-3. Start the app and sign up
-4. You'll see a `student_performance_analytics` database with `users` and `performances` collections
+From the root directory:
 
----
-
-## ☁️ Deployment
-
-### Backend — Deploy on Render
-
-**Option A: Using `render.yaml` (Recommended)**
-
-1. Push the repo to GitHub
-2. In Render, create a new **Blueprint** from the repo
-3. Render reads `render.yaml` and creates the web service automatically
-4. Set the following environment variables when prompted:
-
-| Variable       | Value                                              |
-|----------------|----------------------------------------------------|
-| `MONGO_URI`    | Your MongoDB Atlas connection string               |
-| `CLIENT_URL`   | Your Vercel app URL (e.g., `https://your-app.vercel.app`) |
-| `TOKEN_SECRET` | A long random secret (or let Render generate one)  |
-
-**Option B: Manual Render Web Service**
-
-```
-Root Directory:   (leave blank)
-Runtime:          Node
-Build Command:    cd server && npm install
-Start Command:    cd server && npm start
-Health Check:     /health
-```
-
-Additional environment variable for manual setup:
-
-```env
-ALLOW_VERCEL_PREVIEWS=true
-```
-
-> ⚠️ MongoDB Compass is local only — use **MongoDB Atlas** for production.
+| Script | Description |
+|---|---|
+| `npm run install:all` | Installs dependencies for both client and server |
+| `npm run dev:client` | Starts the React frontend (Vite dev server) |
+| `npm run dev:server` | Starts the Express backend |
+| `npm run build` | Builds the React frontend for production |
+| `npm run start:server` | Starts the backend in production mode |
 
 ---
 
-### Frontend — Deploy on Vercel
+## 🔮 Future Plans
 
-Create a Vercel project from the same GitHub repo with these settings:
-
-```
-Root Directory:    client
-Framework Preset:  Vite
-Build Command:     npm run build
-Output Directory:  dist
-```
-
-Set the environment variable:
-
-```env
-VITE_API_URL=https://your-render-service.onrender.com/api
-```
-
-> After updating environment variables on either platform, redeploy the affected service.
+- [ ] Deploy backend on Render
+- [ ] Deploy frontend on Vercel
+- [ ] Add export to PDF / CSV
+- [ ] Email notifications for fail-risk subjects
+- [ ] Admin panel for teachers to view all students
+- [ ] Dark mode support
 
 ---
 
-## 📜 License
+## 🙋‍♀️ Author
 
-This project is open source. Feel free to fork and build upon it.
+**Subhashini**  
+GitHub: [@subhashini46](https://github.com/subhashini46)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
