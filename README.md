@@ -1,88 +1,105 @@
-# Student Performance Analytics
+# 📊 Student Performance Analytics
 
-A full-stack React website for tracking student marks, GPA, performance trends, weak subjects, fail-risk signals, and study recommendations.
+A full-stack web application for tracking student academic performance — including marks, GPA, subject trends, weak area detection, fail-risk prediction, and personalized study recommendations.
 
-This project is structured in the same spirit as [VaultTrack](https://github.com/Devadharshini784/VaultTrack): a React client, protected auth routes, a global auth context, API helpers, and an Express backend. The code here is original and tailored for student analytics.
+---
 
-## Features
+## ✨ Features
 
-- Sign up, sign in, and protected dashboard access
-- Separate saved data for each user account
-- Subject-wise marks tracking
-- GPA and weighted average calculation
-- Performance trend and subject comparison charts
-- Weak subject detection
-- "May fail this subject" risk prediction
-- Study recommendations based on marks, trends, and attendance
-- Profile controls for term, attendance, and target GPA
+- **Authentication** — Sign up, sign in, and protected dashboard access
+- **Per-user data** — Each account has its own isolated performance records
+- **Marks tracking** — Subject-wise mark entry and management
+- **GPA & weighted average** — Automatic calculation based on entered marks
+- **Performance charts** — Trend lines and subject comparison visualizations
+- **Weak subject detection** — Automatically flags subjects below threshold
+- **Fail-risk prediction** — "May fail this subject" signals based on current data
+- **Study recommendations** — Personalized suggestions based on marks, trends, and attendance
+- **Profile controls** — Configure current term, attendance percentage, and target GPA
 
-## Tech Stack
+---
 
-- React + Vite
-- React Router
-- Recharts
-- Lucide React icons
-- Node.js + Express
-- MongoDB + Mongoose
+## 🛠️ Tech Stack
 
-## Project Structure
+| Layer     | Technology                          |
+|-----------|--------------------------------------|
+| Frontend  | React + Vite, React Router, Recharts, Lucide React |
+| Backend   | Node.js + Express                   |
+| Database  | MongoDB + Mongoose                  |
 
-```text
-Student Performance Analytics/
-|-- client/                 # React frontend
-|   |-- src/
-|   |   |-- api/            # API request helper
-|   |   |-- context/        # Auth context
-|   |   |-- data/           # Analytics calculations
-|   |   |-- pages/          # Auth and dashboard pages
-|   |   `-- styles.css
-|   |-- vercel.json         # Vercel SPA routing config
-|   `-- package.json
-|-- server/                 # Express backend
-|   |-- config/             # MongoDB connection
-|   |-- controllers/
-|   |-- middleware/
-|   |-- models/             # Mongoose models
-|   |-- routes/
-|   |-- utils/
-|   `-- package.json
-|-- render.yaml             # Render web service blueprint
-`-- package.json
+---
+
+## 📁 Project Structure
+
+```
+Student-Performance-Analytics/
+├── client/                  # React frontend
+│   ├── src/
+│   │   ├── api/             # API request helpers
+│   │   ├── context/         # Auth context (global state)
+│   │   ├── data/            # Analytics & GPA calculations
+│   │   ├── pages/           # Auth and dashboard pages
+│   │   └── styles.css
+│   ├── vercel.json          # Vercel SPA routing config
+│   └── package.json
+├── server/                  # Express backend
+│   ├── config/              # MongoDB connection
+│   ├── controllers/         # Route handlers
+│   ├── middleware/          # Auth middleware
+│   ├── models/              # Mongoose schemas
+│   ├── routes/              # API route definitions
+│   ├── utils/               # Helper utilities
+│   └── package.json
+├── render.yaml              # Render deployment blueprint
+├── .gitignore
+└── package.json
 ```
 
-## Run Locally
+---
 
-Prerequisite: Node.js `^20.19.0` or `>=22.12.0`.
+## 🚀 Getting Started (Local Development)
 
-Install frontend and backend dependencies:
+### Prerequisites
+
+- Node.js `^20.19.0` or `>=22.12.0`
+- MongoDB running locally
+
+### 1. Install Dependencies
 
 ```bash
 npm run install:all
 ```
 
-Start the backend:
+### 2. Start the Backend
 
 ```bash
 npm run dev:server
 ```
 
-Start the frontend in another terminal:
+### 3. Start the Frontend
+
+In a separate terminal:
 
 ```bash
 npm run dev:client
 ```
 
-Open `http://127.0.0.1:5173`.
+### 4. Open in Browser
 
-## Local Environment
+```
+http://127.0.0.1:5173
+```
 
-The server defaults to a local MongoDB database:
+---
 
-```text
+## 🔧 Environment Configuration
+
+The server defaults to a local MongoDB instance:
+
+```
 mongodb://127.0.0.1:27017/student_performance_analytics
 ```
 
-Create `server/.env` if you want to customize the connection:
+To customize, create a `server/.env` file:
 
 ```env
 PORT=5000
@@ -93,62 +110,75 @@ TOKEN_SECRET=replace_this_with_a_long_random_secret
 MONGO_URI=mongodb://127.0.0.1:27017/student_performance_analytics
 ```
 
-## MongoDB Compass
+---
 
-1. Make sure MongoDB is running on your laptop.
-2. Open MongoDB Compass.
-3. Connect to `mongodb://127.0.0.1:27017`.
-4. Start this app and sign up once.
-5. You should see a database named `student_performance_analytics` with `users` and `performances` collections.
+## 🗄️ Viewing Data with MongoDB Compass
 
-## Deploy Backend on Render
+1. Ensure MongoDB is running on your machine
+2. Open MongoDB Compass and connect to `mongodb://127.0.0.1:27017`
+3. Start the app and sign up
+4. You'll see a `student_performance_analytics` database with `users` and `performances` collections
 
-Use a hosted MongoDB connection string for deployment. MongoDB Compass on your laptop is local only, so Render cannot connect to it. MongoDB Atlas is the easiest production option.
+---
 
-Option A, using the included `render.yaml`:
+## ☁️ Deployment
 
-1. Push this repo to GitHub.
-2. In Render, create a new Blueprint from the repo.
-3. Render reads `render.yaml` and creates the backend web service.
-4. Add the prompted environment variables:
-   - `MONGO_URI`: your MongoDB Atlas connection string
-   - `CLIENT_URL`: your Vercel app URL, for example `https://student-performance-analytics.vercel.app`
-5. Keep `TOKEN_SECRET` generated by Render, or set your own long random value.
+### Backend — Deploy on Render
 
-Option B, manual Render Web Service:
+**Option A: Using `render.yaml` (Recommended)**
 
-```text
-Root Directory: leave blank
-Runtime: Node
-Build Command: cd server && npm install
-Start Command: cd server && npm start
-Health Check Path: /health
+1. Push the repo to GitHub
+2. In Render, create a new **Blueprint** from the repo
+3. Render reads `render.yaml` and creates the web service automatically
+4. Set the following environment variables when prompted:
+
+| Variable       | Value                                              |
+|----------------|----------------------------------------------------|
+| `MONGO_URI`    | Your MongoDB Atlas connection string               |
+| `CLIENT_URL`   | Your Vercel app URL (e.g., `https://your-app.vercel.app`) |
+| `TOKEN_SECRET` | A long random secret (or let Render generate one)  |
+
+**Option B: Manual Render Web Service**
+
+```
+Root Directory:   (leave blank)
+Runtime:          Node
+Build Command:    cd server && npm install
+Start Command:    cd server && npm start
+Health Check:     /health
 ```
 
-Render environment variables:
+Additional environment variable for manual setup:
 
 ```env
-MONGO_URI=your_mongodb_atlas_connection_string
-TOKEN_SECRET=replace_with_a_long_random_secret
-CLIENT_URL=https://your-vercel-project.vercel.app
 ALLOW_VERCEL_PREVIEWS=true
 ```
 
-## Deploy Frontend on Vercel
+> ⚠️ MongoDB Compass is local only — use **MongoDB Atlas** for production.
 
-Create a Vercel project from the same GitHub repo.
+---
 
-```text
-Root Directory: client
-Framework Preset: Vite
-Build Command: npm run build
-Output Directory: dist
+### Frontend — Deploy on Vercel
+
+Create a Vercel project from the same GitHub repo with these settings:
+
+```
+Root Directory:    client
+Framework Preset:  Vite
+Build Command:     npm run build
+Output Directory:  dist
 ```
 
-Vercel environment variable:
+Set the environment variable:
 
 ```env
 VITE_API_URL=https://your-render-service.onrender.com/api
 ```
 
-After changing Vercel or Render environment variables, redeploy that service.
+> After updating environment variables on either platform, redeploy the affected service.
+
+---
+
+## 📜 License
+
+This project is open source. Feel free to fork and build upon it.
